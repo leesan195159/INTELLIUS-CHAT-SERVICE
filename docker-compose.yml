@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  db:
+    image: mariadb:10.5
+    container_name: chat-db
+    environment:
+      MARIADB_DATABASE: chat_db
+      MARIADB_USER: chat_user
+      MARIADB_PASSWORD: chat_password
+      MARIADB_ROOT_PASSWORD: root_password
+    volumes:
+      - ./init-db:/docker-entrypoint-initdb.d
+      - db-data:/var/lib/mysql
+    ports:
+      - "3307:3306" # 호스트의 3307 포트를 컨테이너의 3306 포트와 연결
+    restart: always
+
+  app:
+    build: .
+    container_name: chat-app
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app # 현재 디렉토리를 컨테이너의 /app 디렉토리와 연결
+    environment:
+      DATABASE_URL: "mysql+pymysql://chat_user:chat_password@db:3306/chat_db"
+
+volumes:
+  db-data: 
