@@ -1,13 +1,13 @@
 from fastapi import FastAPI
+from .database import engine, Base
+from .routers import chat
 
-app = FastAPI(
-    title="Intellius Chat Service",
-    description="AI 상담 채팅 서비스 API",
-    version="1.0.0",
-)
+Base.metadata.create_all(bind=engine)
 
-# app.include_router(chat.router)
+app = FastAPI()
 
-@app.get("/", tags=["Root"])
+app.include_router(chat.router)
+
+@app.get("/")
 def read_root():
-    return {"message": "Welcome to the Intellius Chat Service API!"} 
+    return {"message": "Welcome to the Chat Service API"} 
