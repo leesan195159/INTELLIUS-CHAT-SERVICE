@@ -12,8 +12,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # 5. 애플리케이션 실행
-# uvicorn main:app --host 0.0.0.0 --port 8000
-# --reload 옵션은 개발 중에만 사용하고, 프로덕션에서는 제거하는 것이 좋습니다.
-# 여기서는 docker-compose로 실행할 것이므로 CMD 보다는 docker-compose에서 command를 지정하는 것이 더 유연할 수 있습니다.
-# 하지만 기본 실행 명령을 정의해두는 것도 좋은 방법입니다.
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"] 
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
