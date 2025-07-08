@@ -1,4 +1,4 @@
-# IntelliU 상담 챗봇 서비스 API
+# IntellIUS 상담 챗봇 서비스 API
 
 FastAPI와 MariaDB를 기반으로 구축된 AI 상담 챗봇 서비스의 백엔드 API입니다. 대규모 동시 접속 환경을 가정하여 비동기 처리와 확장성을 고려하여 설계되었습니다.
 
